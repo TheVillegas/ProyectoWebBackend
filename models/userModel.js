@@ -2,6 +2,21 @@ const db = require('../config/db');
 
 const Usuario = {};
 
+//Busca un usuario por su correo electrónico
+Usuario.BuscarPorCorreo = (correo, callback) => {
+  db.query('SELECT * FROM tabla_usuarios WHERE correo = ?', [correo], (err, resultados) => {
+    if(err) return callback(err);
+    callback(null, resultados[0]);
+  });
+};
+Usuario.BuscarPorRut = (rut, callback) => {
+  db.query('SELECT * FROM tabla_usuarios WHERE rut = ?', [rut], (err, resultados) => {
+    if(err) return callback(err);
+    callback(null, resultados[0]);
+  });
+}
+
+
 Usuario.crear = (datos, callback) => {
   const {
     nombre_apellido,
