@@ -10,7 +10,7 @@ router.get('/ping', (req, res) => {
 });
 
 
-router.post("/login", loginUser);
+router.post("/login", userController.loginUser);
 
 router.post('/usuarios',userController.crearUsuario);
 router.get('/usuarios', userController.obtenerUsuarios);

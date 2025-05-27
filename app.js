@@ -2,10 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+
+app.use(express.json());
+app.use(cors());
+
+
 const userRoutes = require('./routes/userRoutes');
 
-app.use(cors());
-app.use(express.json());
 app.use('/users', userRoutes);
 
 config={SERVER:"localhost", PORT:3000}
