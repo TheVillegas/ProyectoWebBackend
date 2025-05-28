@@ -12,7 +12,7 @@ router.get('/ping', (req, res) => {
 
 router.post("/login", userController.loginUser);
 
-router.post('/usuarios',userController.crearUsuario);
+router.post('/register',userController.crearUsuario);
 router.get('/usuarios', userController.obtenerUsuarios);
 
 
