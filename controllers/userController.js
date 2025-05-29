@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const SECRET_KEY = 'tu_clave_secreta_aqui';
 const db = require("../config/db");
+
 //Metodo para autenticar un usuario recien creado. 
 exports.crearUsuario = (req, res) => {
  const {

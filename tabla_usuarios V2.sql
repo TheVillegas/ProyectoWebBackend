@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2025 a las 03:52:31
+-- Tiempo de generación: 29-05-2025 a las 02:47:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -45,7 +45,10 @@ CREATE TABLE `tabla_usuarios` (
 
 INSERT INTO `tabla_usuarios` (`id`, `nombre_apellido`, `rut`, `correo`, `ubicacion`, `establecimiento`, `contraseña`, `acepta_terminos`, `fecha_registro`) VALUES
 (1, 'Juan Pérez', '12345678-9', 'juan@example.com', 'Santiago', 'Colegio Ejemplo', 'mi_clave_segura', 1, '0000-00-00 00:00:00'),
-(2, 'María González', '98765432-1', 'maria.gonzalez@mail.com', 'Valparaíso', 'Liceo Central', 'clave12345', 1, '0000-00-00 00:00:00');
+(2, 'María González', '98765432-1', 'maria.gonzalez@mail.com', 'Valparaíso', 'Liceo Central', 'clave12345', 1, '0000-00-00 00:00:00'),
+(7, 'María Torres', '12345678-2', 'maria@correo.com', 'Santiago', 'Colegio XYZ', '$2b$10$esMIxj9FuVWGe6IvSqPktua2V663NFzOXnIWzsbfMTcqRmRYDbepi', 1, '0000-00-00 00:00:00'),
+(8, 'Juan', '67192345-9', 'aaaa@prueba.com', 'santiago', 'sscc', '$2b$10$2fBo59Im7tFBo6PZQfAL/.v/uC6A5xR59h12sXp6Z8LdTfMGv6Xr.', 1, '0000-00-00 00:00:00'),
+(9, 'Juan Lopez', '12.345.678', 'juan.perez@ejemplo.com', 'Santiago, Chile', 'Veterinaria AnimalCare', '$2b$10$g9nV1CyeeLCENFGjO/Xqau3SWRwFYwTjmsbZGsgsWFuRMVs1yGIyK', 1, '0000-00-00 00:00:00');
 
 --
 -- Índices para tablas volcadas
@@ -66,7 +69,7 @@ ALTER TABLE `tabla_usuarios`
 -- AUTO_INCREMENT de la tabla `tabla_usuarios`
 --
 ALTER TABLE `tabla_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
