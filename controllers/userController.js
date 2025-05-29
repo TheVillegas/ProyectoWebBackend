@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'tu_clave_secreta_aqui';
 const db = require("../config/db");
 
-//Metodo para autenticar un usuario recien creado. 
 exports.crearUsuario = (req, res) => {
  const {
     nombre_apellido,
@@ -82,7 +81,7 @@ exports.obtenerUsuarios = (req, res) => {
 
 
 //Confirmar inicio de Sesión
-exports.loginUser = (req, res) => {
+/*exports.loginUser = (req, res) => {
   const { correo, contrasena } = req.body;
   if (!correo || !contrasena) return res.status(400).json({ mensaje: "Datos incompletos" });
 
@@ -109,5 +108,29 @@ exports.loginUser = (req, res) => {
         correo: usuario.correo
       }
     });
+  });
+};*/
+
+
+exports.loginUser = (req, res) => {
+  const { correo , contrasena } = req.body;
+  if (!correo || !contrasena) return res.status(400).json({mensaje: "Datos incompletos"});
+
+  const query = 'SELECT * FROM tabla_usuarios WHERE correo = ?';
+
+  db.query(query, [correo], (err, results) => {
+    if (err) return res.status(500).json({ mensaje: "Error en la base de datos" });
+    if (results.length === 0) return res.status(404).json({ mensaje: "Usuario no encontrado" });
+
+    const usuario = results[0];
+
+    console.log("Contraseña enviada:", contrasena);
+    console.log("Contraseña esperada:", usuario["contraseña"]);
+
+    if (contrasena !== usuario["contraseña"]) {
+      return res.status(401).json({ mensaje: "Contraseña incorrecta" });
+    }
+
+    return res.status(200).json({ mensaje: "Inicio de sesión exitoso ✅" });
   });
 };
