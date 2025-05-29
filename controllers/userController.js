@@ -96,6 +96,11 @@ exports.loginUser = (req, res) => {
     const passIsValid = bcrypt.compareSync(contrasena, usuario["contraseña"]);
 
     if (!passIsValid) return res.status(401).json({ mensaje: "Contraseña incorrecta" });
+    // correo incorrecto
+    if (usuario.correo !== correo) {
+      return res.status(401).json({ mensaje: "Correo incorrecto" });
+    }
+
 
     // Si la contraseña es válida, se genera un token
     const token = jwt.sign({ id: usuario.id, correo: usuario.correo }, SECRET_KEY, { expiresIn: '1h' });

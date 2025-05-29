@@ -9,9 +9,6 @@ app.use(cors());
 
 const userRoutes = require('./routes/userRoutes');
 
-//app.use('/users', userRoutes);
-
-
 config={SERVER:"localhost", PORT:3000}
 const PORT = config.PORT || 3000;
 
