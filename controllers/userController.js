@@ -116,3 +116,78 @@ exports.loginUser = (req, res) => {
     });
   });
 };
+
+//Metodo para crear un evento
+
+exports.crearEvento = (req, res) => {
+  const { nombre_evento, fecha_inicio, fecha_termino,descripcion,ubicacion,url} = req.body;
+  
+  if (!nombre_evento || !fecha_inicio || !fecha_termino || !descripcion || !ubicacion || !url) {
+    return res.status(400).json({ mensaje: "Datos incompletos" });//cambiar mensaje
+  }
+
+  const query = 'INSERT INTO eventos (nombre_evento, fecha_inicio, fecha_termino, descripcion, ubicacion, url) VALUES (?, ?, ?, ?, ?, ?)';
+
+  db.query(query, [nombre_evento, fecha_inicio, fecha_termino, descripcion, ubicacion, url], (err, results) => {
+    if(err) {
+      console.error(err);
+      return res.status(500).json({ mensaje: "Error al crear el evento" });
+    }
+    res.status(201).json({ mensaje: "Evento creado exitosamente", eventoId: results.insertId });
+  });
+}
+
+exports.obtenerEventos = (req, res) => {
+  const query = 'SELECT * FROM eventos';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ mensaje: "Error al obtener eventos" });
+    }
+    res.status(200).json(results);
+  });
+}
+
+exports.eliminarEvento = (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ mensaje: "ID de evento requerido" });
+  }
+
+  const query = 'DELETE FROM eventos WHERE id = ?';
+
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ mensaje: "Error al eliminar el evento" });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ mensaje: "Evento no encontrado" });
+    }
+    res.status(200).json({ mensaje: "Evento eliminado exitosamente" });
+  });
+}
+
+exports.actualizarEvento = (req, res) => {
+  const { id } = req.params;
+  const { nombre_evento, fecha_inicio, fecha_termino, descripcion, ubicacion, url } = req.body;
+
+  if (!id || !nombre_evento || !fecha_inicio || !fecha_termino || !descripcion || !ubicacion || !url) {
+    return res.status(400).json({ mensaje: "Datos incompletos" });
+  }
+
+  const query = 'UPDATE eventos SET nombre_evento = ?, fecha_inicio = ?, fecha_termino = ?, descripcion = ?, ubicacion = ?, url = ? WHERE id = ?';
+
+  db.query(query, [nombre_evento, fecha_inicio, fecha_termino, descripcion, ubicacion, url, id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ mensaje: "Error al actualizar el evento" });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ mensaje: "Evento no encontrado" });
+    }
+    res.status(200).json({ mensaje: "Evento actualizado exitosamente" });
+  });
+}
