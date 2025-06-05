@@ -11,6 +11,8 @@ const userRoutes = require('./routes/userRoutes');
 
 config={SERVER:"localhost", PORT:3000}
 const PORT = config.PORT || 3000;
+ 
+app.use('/api/users', userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
@@ -20,4 +22,3 @@ app.get('/', (req, res) => {
   res.send('Servidor corriendo ✅');
 });
  
-app.use('/api/users', userRoutes);

@@ -83,8 +83,8 @@ exports.obtenerUsuarios = (req, res) => {
 
 //Confirmar inicio de Sesión
 exports.loginUser = (req, res) => {
-  const { correo, contrasena } = req.body;
-  if (!correo || !contrasena) return res.status(400).json({ mensaje: "Datos incompletos" });
+  const { correo, contraseña } = req.body;
+  if (!correo || !contraseña) return res.status(400).json({ mensaje: "Datos incompletos" });
 
   const query = 'SELECT * FROM tabla_usuarios WHERE correo = ?';
 
@@ -93,7 +93,7 @@ exports.loginUser = (req, res) => {
     if (results.length === 0) return res.status(404).json({ mensaje: "Usuario no encontrado" });
 
     const usuario = results[0];
-    const passIsValid = bcrypt.compareSync(contrasena, usuario["contraseña"]);
+    const passIsValid = bcrypt.compareSync(contraseña, usuario["contraseña"]);
 
     if (!passIsValid) return res.status(401).json({ mensaje: "Contraseña incorrecta" });
     // correo incorrecto
